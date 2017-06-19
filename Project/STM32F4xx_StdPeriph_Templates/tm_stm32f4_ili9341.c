@@ -375,7 +375,7 @@ LCD_ILI9488_Parameter(0x80);
 
 
 LCD_ILI9488_CMD(0x36);
-LCD_ILI9488_Parameter(0x08);
+LCD_ILI9488_Parameter(0xC8);
 
 LCD_ILI9488_CMD(0x3A);  //Interface Mode Control
 LCD_ILI9488_Parameter(0x66);
@@ -402,6 +402,7 @@ LCD_ILI9488_Parameter(0x2C);
 LCD_ILI9488_Parameter(0x82);
 
 LCD_ILI9488_CMD(0x11);
+	Delay(15);
 LCD_ILI9488_CMD(0x29);
 //	TM_ILI9341_Delay(1000000);
 //
@@ -409,6 +410,7 @@ LCD_ILI9488_CMD(0x29);
 //	TM_ILI9341_SendCommand(ILI9341_GRAM);
 
 #elif 0 //
+
 #define MADCTL_MY  0x80
 #define MADCTL_MX  0x40
 #define MADCTL_MV  0x20
@@ -621,12 +623,12 @@ LCD_ILI9488_CMD(0x29);
 
 	/* Sleep Out (11h) */
 	ILI9488WriteReg(0x11);
-	Delay(150);
+	Delay(15);
 
 	/* Display ON (29h) */
 	ILI9488WriteReg(0x29);
 
-#elif 1
+#elif 0         // works!
 
 /* Level 1 Commands (from the display Datasheet) */
 #define ILI9488_CMD_NOP                             0x00
@@ -935,7 +937,7 @@ LCD_ILI9488_CMD(0x29);
 	ili9488_deselect_chip();
 
 
-#else
+#else   // works!
 
 #define ILI9488_WriteCmd         TM_ILI9341_SendCommand
 #define ILI9488_WriteParam        TM_ILI9341_SendData
@@ -992,14 +994,14 @@ LCD_ILI9488_CMD(0x29);
 
 //	ILI9488_SetDirection(0);	/* 横屏(排线在左边) */
         ILI9488_WriteCmd(0x36);
-//	ILI9488_WriteParam(0xA8);	/* 横屏(排线在左边) */
-		ILI9488_WriteParam(0x68);	/* 横屏 (排线在右边) */
-//		ILI9488_WriteParam(0xC8);	/* 竖屏(排线在上) */
+//		ILI9488_WriteParam(0xA8);	/* 横屏(排线在左边) */
+//		ILI9488_WriteParam(0x68);	/* 横屏 (排线在右边) */
+		ILI9488_WriteParam(0xC8);	/* 竖屏(排线在上) */
 //		ILI9488_WriteParam(0x08);	/* 竖屏(排线在下) */
 
         /* Interface Pixel Format (3Ah) */
 	ILI9488_WriteCmd(0x3A);
-	ILI9488_WriteParam(0x55);	/* 0x55 : 16 bits/pixel  */
+	ILI9488_WriteParam(0x51);	/* 0x55 : 16 bits/pixel  */
 
 	/* PGAMCTRL (Positive Gamma Control) (E0h) */
 	ILI9488_WriteCmd(0xE0);
