@@ -149,7 +149,8 @@ void TM_ILI9341_Init() {
 //	ILI9341_Opts.orientation = TM_ILI9341_Landscape;
 
 	/* Fill with white color */
-	TM_ILI9341_Fill(ILI9341_COLOR_CYAN);
+//	TM_ILI9341_Fill(ILI9341_COLOR_CYAN);
+	TM_ILI9341_Fill(0xFFFFFF);
 //        TM_ILI9341_INT_Fill(0, 0, 320 - 1, 480, ILI9341_COLOR_RED);
 }
 
@@ -1137,7 +1138,7 @@ void TM_ILI9341_DrawPixel(uint16_t x, uint16_t y, uint32_t color) {
 
 	TM_ILI9341_SendCommand(ILI9341_GRAM);
 #if 0	// RGB-565
-	TM_ILI9341_SendData(color >> 8);
+	TM_ILI9341_SendData((color >> 8) & 0xFF);
 	TM_ILI9341_SendData(color & 0xFF);
 #else	// RGB-666
 	TM_ILI9341_SendData((color >> 16) & 0xFF);
@@ -1194,16 +1195,16 @@ void TM_ILI9341_INT_Fill(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uin
 	TM_SPI_SetDataSize(ILI9341_SPI, TM_SPI_DataSize_16b);
 
 	/* Send first 65535 bytes, SPI MUST BE IN 16-bit MODE */
-//	TM_SPI_DMA_SendHalfWord(ILI9341_SPI, color, (pixels_count > 0xFFFF) ? 0xFFFF : pixels_count);
-	TM_SPI_DMA_SendWord(ILI9341_SPI, color, (pixels_count > 0xFFFF) ? 0xFFFF : pixels_count);
+	TM_SPI_DMA_SendHalfWord(ILI9341_SPI, color, (pixels_count > 0xFFFF) ? 0xFFFF : pixels_count);
+//	TM_SPI_DMA_SendWord(ILI9341_SPI, color, (pixels_count > 0xFFFF) ? 0xFFFF : pixels_count);
 	/* Wait till done */
 	while (TM_SPI_DMA_Working(ILI9341_SPI));
 
 	/* Check again */
 	if (pixels_count > 0xFFFF) {
 		/* Send remaining data */
-//		TM_SPI_DMA_SendHalfWord(ILI9341_SPI, color, pixels_count - 0xFFFF);
-		TM_SPI_DMA_SendWord(ILI9341_SPI, color, pixels_count - 0xFFFF);
+		TM_SPI_DMA_SendHalfWord(ILI9341_SPI, color, pixels_count - 0xFFFF);
+//		TM_SPI_DMA_SendWord(ILI9341_SPI, color, pixels_count - 0xFFFF);
 		/* Wait till done */
 		while (TM_SPI_DMA_Working(ILI9341_SPI));
 	}
