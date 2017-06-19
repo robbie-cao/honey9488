@@ -1168,7 +1168,7 @@ void TM_ILI9341_Fill(uint32_t color) {
 
 void TM_ILI9341_INT_Fill(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint32_t color)
 {
-#if 1
+#if 0
   for (uint16_t x = x0; x < x1; x++) {
     for (uint16_t y = y0; y < y1; y++) {
       TM_ILI9341_DrawPixel(x, y, color);
@@ -1194,14 +1194,16 @@ void TM_ILI9341_INT_Fill(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uin
 	TM_SPI_SetDataSize(ILI9341_SPI, TM_SPI_DataSize_16b);
 
 	/* Send first 65535 bytes, SPI MUST BE IN 16-bit MODE */
-	TM_SPI_DMA_SendHalfWord(ILI9341_SPI, color, (pixels_count > 0xFFFF) ? 0xFFFF : pixels_count);
+//	TM_SPI_DMA_SendHalfWord(ILI9341_SPI, color, (pixels_count > 0xFFFF) ? 0xFFFF : pixels_count);
+	TM_SPI_DMA_SendWord(ILI9341_SPI, color, (pixels_count > 0xFFFF) ? 0xFFFF : pixels_count);
 	/* Wait till done */
 	while (TM_SPI_DMA_Working(ILI9341_SPI));
 
 	/* Check again */
 	if (pixels_count > 0xFFFF) {
 		/* Send remaining data */
-		TM_SPI_DMA_SendHalfWord(ILI9341_SPI, color, pixels_count - 0xFFFF);
+//		TM_SPI_DMA_SendHalfWord(ILI9341_SPI, color, pixels_count - 0xFFFF);
+		TM_SPI_DMA_SendWord(ILI9341_SPI, color, pixels_count - 0xFFFF);
 		/* Wait till done */
 		while (TM_SPI_DMA_Working(ILI9341_SPI));
 	}

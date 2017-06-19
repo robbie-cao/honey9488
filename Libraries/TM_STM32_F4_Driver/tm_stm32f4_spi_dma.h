@@ -279,6 +279,9 @@ uint8_t TM_SPI_DMA_SendByte(SPI_TypeDef* SPIx, uint8_t value, uint16_t count);
  */
 uint8_t TM_SPI_DMA_SendHalfWord(SPI_TypeDef* SPIx, uint16_t value, uint32_t count);
 
+uint8_t TM_SPI_DMA_SendWord(SPI_TypeDef* SPIx, uint32_t value, uint32_t count);
+
+
 /**
  * @brief  Checks if SPI DMA is still sending/receiving data
  * @param  *SPIx: Pointer to SPIx where you want to enable DMA TX mode
