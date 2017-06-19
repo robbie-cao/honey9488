@@ -165,10 +165,92 @@ void TM_ILI9341_InitLCD(void) {
 	/* Software reset */
 	TM_ILI9341_SendCommand(ILI9341_RESET);
 	TM_ILI9341_Delay(50000);
-        while (0) {
-	TM_ILI9341_SendCommand(ILI9341_POWERA);
-	TM_ILI9341_Delay(20000);
-        }
+
+#if 1	// Another init sequece in RGB-666 format
+//----
+#define SPI4_CMD_8bit   TM_ILI9341_SendCommand
+#define SPI4_DAT_8bit  TM_ILI9341_SendData
+	SPI4_CMD_8bit(0xE0);
+	SPI4_DAT_8bit(0x00);
+	SPI4_DAT_8bit(0x03);
+	SPI4_DAT_8bit(0x0C);
+	SPI4_DAT_8bit(0x09);
+	SPI4_DAT_8bit(0x17);
+	SPI4_DAT_8bit(0x09);
+	SPI4_DAT_8bit(0x3E);
+	SPI4_DAT_8bit(0x89);
+	SPI4_DAT_8bit(0x49);
+	SPI4_DAT_8bit(0x08);
+	SPI4_DAT_8bit(0x0D);
+	SPI4_DAT_8bit(0x0A);
+	SPI4_DAT_8bit(0x13);
+	SPI4_DAT_8bit(0x15);
+	SPI4_DAT_8bit(0x0f);
+
+	SPI4_CMD_8bit(0xE1);
+	SPI4_DAT_8bit(0x00);
+	SPI4_DAT_8bit(0x11);
+	SPI4_DAT_8bit(0x15);
+	SPI4_DAT_8bit(0x03);
+	SPI4_DAT_8bit(0x0F);
+	SPI4_DAT_8bit(0x05);
+	SPI4_DAT_8bit(0x2D);
+	SPI4_DAT_8bit(0x34);
+	SPI4_DAT_8bit(0x41);
+	SPI4_DAT_8bit(0x02);
+	SPI4_DAT_8bit(0x0B);
+	SPI4_DAT_8bit(0x0A);
+	SPI4_DAT_8bit(0x33);
+	SPI4_DAT_8bit(0x37);
+	SPI4_DAT_8bit(0x0f);
+
+	SPI4_CMD_8bit(0xC0);
+	SPI4_DAT_8bit(0x17);
+	SPI4_DAT_8bit(0x15);
+
+	SPI4_CMD_8bit(0xC1);
+	SPI4_DAT_8bit(0x41);
+
+	SPI4_CMD_8bit(0xC5);
+	SPI4_DAT_8bit(0x00);
+	SPI4_DAT_8bit(0x12); // VCOM
+	SPI4_DAT_8bit(0x80);
+
+	SPI4_CMD_8bit(0x36);
+	SPI4_DAT_8bit(0x48);
+
+	SPI4_CMD_8bit(0x3A);  //Interface Mode Control
+	SPI4_DAT_8bit(0x66);  //6-6-6
+
+	SPI4_CMD_8bit(0XB0);  //Interface Mode Control
+	SPI4_DAT_8bit(0x00);
+
+	SPI4_CMD_8bit(0xB4);
+	SPI4_DAT_8bit(0x02);
+
+	SPI4_CMD_8bit(0xB6);  //mcu-interface
+	SPI4_DAT_8bit(0x02);
+	SPI4_DAT_8bit(0x02);
+
+
+	SPI4_CMD_8bit(0xE9);
+	SPI4_DAT_8bit(0x00);
+
+	SPI4_CMD_8bit(0XF7);
+	SPI4_DAT_8bit(0xA9);
+	SPI4_DAT_8bit(0x51);
+	SPI4_DAT_8bit(0x2C);
+	SPI4_DAT_8bit(0x82);
+
+	SPI4_CMD_8bit(0x11); //Exit Sleep
+	Delay(15);
+	SPI4_CMD_8bit(0x29); //Display on
+	Delay(10);
+
+        return;
+//----
+#endif
+
 #if 0
 	TM_ILI9341_SendCommand(ILI9341_POWERA);
 	TM_ILI9341_SendData(0x39);
@@ -1047,12 +1129,13 @@ void TM_ILI9341_DrawPixel(uint16_t x, uint16_t y, uint32_t color) {
 	TM_ILI9341_SetCursorPosition(x, y, x, y);
 
 	TM_ILI9341_SendCommand(ILI9341_GRAM);
-#if 1
+#if 0
 	TM_ILI9341_SendData(color >> 8);
 	TM_ILI9341_SendData(color & 0xFF);
 #else
+	TM_ILI9341_SendData((color >> 16) & 0xFF);
+	TM_ILI9341_SendData((color >> 8) & 0xFF);
 	TM_ILI9341_SendData(color & 0xFF);
-	TM_ILI9341_SendData(color >> 8);
 #endif
 }
 

@@ -66,6 +66,27 @@ extern TM_FontDef_t TM_Font_7x10;
 extern TM_FontDef_t TM_Font_11x18;
 extern TM_FontDef_t TM_Font_16x26;
 
+// Color definitions
+#define ILI9488_BLACK       0x00000000      /*   0,   0,   0 */
+#define ILI9488_NAVY        0x00097194      /*   0,   0, 128 */
+#define ILI9488_DARKGREEN   0x001F7300      /*   0, 128,   0 */
+#define ILI9488_DARKCYAN    0x0001857E      /*   0, 128, 128 */
+#define ILI9488_MAROON      0x00E770FF      /* 128,   0,   0 */
+#define ILI9488_PURPLE      0x00710087      /* 128,   0, 128 */
+#define ILI9488_OLIVE       0x00007BE0      /* 128, 128,   0 */
+#define ILI9488_LIGHTGREY   0x0000C618      /* 192, 192, 192 */
+#define ILI9488_DARKGREY    0x00007BEF      /* 128, 128, 128 */
+#define ILI9488_BLUE        0x000D15FF      /*   0,   0, 255 */
+#define ILI9488_GREEN       0x0031FF0D      /*   0, 255,   0 */
+#define ILI9488_CYAN        0x000007FF      /*   0, 255, 255 */
+#define ILI9488_RED         0x00FF1919      /* 255,   0,   0 */
+#define ILI9488_MAGENTA     0x00FF5CDE      /* 255,   0, 255 */
+#define ILI9488_YELLOW      0x00FAFF5C      /* 255, 255,   0 */
+#define ILI9488_WHITE       0x00FFFFFE      /* 255, 255, 255 */
+#define ILI9488_ORANGE      0x00DB7100      /* 255, 165,   0 */
+#define ILI9488_GREENYELLOW 0x0000AFE5      /* 173, 255,  47 */
+#define ILI9488_PINK        0x0000F81F
+
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -108,28 +129,32 @@ int main(void)
     TM_ILI9341_Puts(160, 240, "Hello 9488", &TM_Font_11x18, ILI9341_COLOR_RED, ILI9341_COLOR_WHITE);
     TM_ILI9341_Puts(0, 400, "320RGB x 480 Resolution and 16.7M-color", &TM_Font_7x10, ILI9341_COLOR_BLACK, ILI9341_COLOR_WHITE);
   }
+    TM_ILI9341_Puts(0, 60, "Honeywell", &TM_Font_16x26, 0xFF0000, 0xFFFFFF);
+    TM_ILI9341_Puts(0, 90, "Honeywell", &TM_Font_16x26, 0x00FF00, 0xFFFFFF);
+    TM_ILI9341_Puts(0, 120, "Honeywell", &TM_Font_16x26, 0x0000FF, 0xFFFFFF);
+
   TM_ILI9341_DrawPixel(10, 100, ILI9341_COLOR_RED);
   TM_ILI9341_DrawPixel(10, 102, ILI9341_COLOR_BLUE);
   TM_ILI9341_DrawPixel(10, 104, ILI9341_COLOR_GREEN);
 
   for (int i = 10; i < 30; i++) {
-    TM_ILI9341_DrawLine(i, 110, i, 200, ILI9341_COLOR_RED);
+    TM_ILI9341_DrawLine(i, 150, i, 250, 0xFF0000);
   }
   for (int i = 30; i < 50; i++) {
-    TM_ILI9341_DrawLine(i, 110, i, 200, ILI9341_COLOR_GREEN);
+    TM_ILI9341_DrawLine(i, 150, i, 250, 0x00FF00);
   }
   for (int i = 50; i < 70; i++) {
-    TM_ILI9341_DrawLine(i, 110, i, 200, ILI9341_COLOR_BLUE);
+    TM_ILI9341_DrawLine(i, 150, i, 250, 0x0000FF);
   }
 
   for (int i = 100; i < 120; i++) {
-    TM_ILI9341_DrawLine(100, i, 200, i, ILI9341_COLOR_RED);
+    TM_ILI9341_DrawLine(150, i, 250, i, 0xFF0000);
   }
   for (int i = 120; i < 140; i++) {
-    TM_ILI9341_DrawLine(100, i, 200, i, ILI9341_COLOR_GREEN);
+    TM_ILI9341_DrawLine(150, i, 250, i, 0x00FF00);
   }
   for (int i = 140; i < 160; i++) {
-    TM_ILI9341_DrawLine(100, i, 200, i, ILI9341_COLOR_BLUE);
+    TM_ILI9341_DrawLine(150, i, 250, i, 0x0000FF);
   }
 
   while (1);
