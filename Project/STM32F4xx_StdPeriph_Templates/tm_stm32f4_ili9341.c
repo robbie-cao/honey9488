@@ -266,65 +266,13 @@ void TM_ILI9341_InitLCD(void) {
 
 	TM_ILI9341_SendCommand(ILI9341_DISPLAY_ON);
 	TM_ILI9341_SendCommand(ILI9341_GRAM);
-#elif 0
+
+
+#elif 1         // works!
+
+
 #define LCD_ILI9488_CMD         TM_ILI9341_SendCommand
 #define LCD_ILI9488_Parameter   TM_ILI9341_SendData
-	TM_ILI9341_SendCommand(ILI9341_POWERA);
-	TM_ILI9341_SendData(0x39);
-	TM_ILI9341_SendData(0x2C);
-	TM_ILI9341_SendData(0x00);
-	TM_ILI9341_SendData(0x34);
-	TM_ILI9341_SendData(0x02);
-	TM_ILI9341_SendCommand(ILI9341_POWERB);
-	TM_ILI9341_SendData(0x00);
-	TM_ILI9341_SendData(0xC1);
-	TM_ILI9341_SendData(0x30);
-	TM_ILI9341_SendCommand(ILI9341_DTCA);
-	TM_ILI9341_SendData(0x85);
-	TM_ILI9341_SendData(0x00);
-	TM_ILI9341_SendData(0x78);
-	TM_ILI9341_SendCommand(ILI9341_DTCB);
-	TM_ILI9341_SendData(0x00);
-	TM_ILI9341_SendData(0x00);
-	TM_ILI9341_SendCommand(ILI9341_POWER_SEQ);
-	TM_ILI9341_SendData(0x64);
-	TM_ILI9341_SendData(0x03);
-	TM_ILI9341_SendData(0x12);
-	TM_ILI9341_SendData(0x81);
-	TM_ILI9341_SendCommand(ILI9341_PRC);
-	TM_ILI9341_SendData(0x20);
-	TM_ILI9341_SendCommand(ILI9341_POWER1);
-	TM_ILI9341_SendData(0x23);
-	TM_ILI9341_SendCommand(ILI9341_POWER2);
-	TM_ILI9341_SendData(0x10);
-	TM_ILI9341_SendCommand(ILI9341_VCOM1);
-	TM_ILI9341_SendData(0x3E);
-	TM_ILI9341_SendData(0x28);
-	TM_ILI9341_SendCommand(ILI9341_VCOM2);
-	TM_ILI9341_SendData(0x86);
-	TM_ILI9341_SendCommand(ILI9341_MAC);
-	TM_ILI9341_SendData(0x48);
-	TM_ILI9341_SendCommand(ILI9341_PIXEL_FORMAT);
-	TM_ILI9341_SendData(0x55);
-	TM_ILI9341_SendCommand(ILI9341_FRC);
-	TM_ILI9341_SendData(0x00);
-	TM_ILI9341_SendData(0x18);
-	TM_ILI9341_SendCommand(ILI9341_DFC);
-	TM_ILI9341_SendData(0x08);
-	TM_ILI9341_SendData(0x82);
-	TM_ILI9341_SendData(0x27);
-	TM_ILI9341_SendCommand(ILI9341_3GAMMA_EN);
-	TM_ILI9341_SendData(0x00);
-	TM_ILI9341_SendCommand(ILI9341_COLUMN_ADDR);
-	TM_ILI9341_SendData(0x00);
-	TM_ILI9341_SendData(0x00);
-	TM_ILI9341_SendData(0x00);
-	TM_ILI9341_SendData(0xEF);
-	TM_ILI9341_SendCommand(ILI9341_PAGE_ADDR);
-	TM_ILI9341_SendData(0x00);
-	TM_ILI9341_SendData(0x00);
-	TM_ILI9341_SendData(0x01);
-	TM_ILI9341_SendData(0x3F);
 
 //-----------------CMI------------
 LCD_ILI9488_CMD(0xE0);
@@ -378,19 +326,21 @@ LCD_ILI9488_CMD(0x36);
 LCD_ILI9488_Parameter(0xC8);
 
 LCD_ILI9488_CMD(0x3A);  //Interface Mode Control
-LCD_ILI9488_Parameter(0x66);
+LCD_ILI9488_Parameter(0x51);
 
 LCD_ILI9488_CMD(0XB0);  //Interface Mode Control
 LCD_ILI9488_Parameter(0x00);
 LCD_ILI9488_CMD(0xB1);   //Frame rate 70HZ
 LCD_ILI9488_Parameter(0xB0);
+LCD_ILI9488_Parameter(0x11);
 
 LCD_ILI9488_CMD(0xB4);
 LCD_ILI9488_Parameter(0x02);
 
 LCD_ILI9488_CMD(0xB6);  //RGB/MCU Interface Control
-LCD_ILI9488_Parameter(0x72);
+LCD_ILI9488_Parameter(0x00);
 LCD_ILI9488_Parameter(0x22);
+LCD_ILI9488_Parameter(0x3B);
 
 LCD_ILI9488_CMD(0xE9);
 LCD_ILI9488_Parameter(0x00);
@@ -404,12 +354,8 @@ LCD_ILI9488_Parameter(0x82);
 LCD_ILI9488_CMD(0x11);
 	Delay(15);
 LCD_ILI9488_CMD(0x29);
-//	TM_ILI9341_Delay(1000000);
-//
-//	TM_ILI9341_SendCommand(ILI9341_DISPLAY_ON);
-//	TM_ILI9341_SendCommand(ILI9341_GRAM);
 
-#elif 0 //
+#elif 1 //
 
 #define MADCTL_MY  0x80
 #define MADCTL_MX  0x40
@@ -426,7 +372,7 @@ LCD_ILI9488_CMD(0x29);
 	TM_ILI9341_SendData(0xA0);
 
 	TM_ILI9341_SendCommand(0xB4); //Display Inversion Control , 2 Dot
-  TM_ILI9341_SendData(0x02);
+        TM_ILI9341_SendData(0x02);
 
 	TM_ILI9341_SendCommand(0xB6); //RGB/MCU Interface Control
 	TM_ILI9341_SendData(0x02);
@@ -456,13 +402,13 @@ LCD_ILI9488_CMD(0x29);
 	TM_ILI9341_SendData(0x80);
 
 	TM_ILI9341_SendCommand(0x36);  //Memory Access
-	TM_ILI9341_SendData(0x48);
+	TM_ILI9341_SendData(0xC8);
 
 
 
 	//16bpp DPI and DBI and
 	TM_ILI9341_SendCommand(0x3A);  //Interface Pixel Format
-	TM_ILI9341_SendData(0x66);
+	TM_ILI9341_SendData(0x51);
 
 
 
@@ -526,7 +472,7 @@ LCD_ILI9488_CMD(0x29);
 
 	TM_ILI9341_SendCommand(0x36); //set default rotation to 0
 //  TM_ILI9341_SendData(MADCTL_MX | MADCTL_BGR);
-  TM_ILI9341_SendData(0x00);
+  TM_ILI9341_SendData(0xC8);
 
 	TM_ILI9341_SendCommand(0x11);    	//Exit Sleep
 	TM_ILI9341_Delay(120000);
