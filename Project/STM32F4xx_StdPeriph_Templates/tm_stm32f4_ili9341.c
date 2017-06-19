@@ -149,8 +149,8 @@ void TM_ILI9341_Init() {
 //	ILI9341_Opts.orientation = TM_ILI9341_Landscape;
 
 	/* Fill with white color */
-//	TM_ILI9341_Fill(ILI9341_COLOR_CYAN);
-	TM_ILI9341_Fill(0xFFFFFF);
+	TM_ILI9341_Fill(ILI9341_COLOR_CYAN);
+//	TM_ILI9341_Fill(0xFFFFFF);
 //        TM_ILI9341_INT_Fill(0, 0, 320 - 1, 480, ILI9341_COLOR_RED);
 }
 

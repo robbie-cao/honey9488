@@ -159,11 +159,11 @@ int main(void)
 
 
   TM_ILI9341_DrawFilledRectangle(20, 200, 200, 250, 0xFF0000);
-  TM_ILI9341_DrawFilledCircle(100, 300, 50, 0x000000);
+  TM_ILI9341_DrawFilledCircle(100, 200, 50, 0x000000);
 
-  while (1);
+  while (0);
 
-  while (0) {
+  while (1) {
     TM_ILI9341_SendCommand(0x21);
     Delay(100);
     TM_ILI9341_SendCommand(0x20);
