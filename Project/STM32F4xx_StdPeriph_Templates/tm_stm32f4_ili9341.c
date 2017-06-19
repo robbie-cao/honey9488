@@ -268,7 +268,7 @@ void TM_ILI9341_InitLCD(void) {
 	TM_ILI9341_SendCommand(ILI9341_GRAM);
 
 
-#elif 1         // works!
+#elif 0         // works!
 
 
 #define LCD_ILI9488_CMD         TM_ILI9341_SendCommand
@@ -355,7 +355,7 @@ LCD_ILI9488_CMD(0x11);
 	Delay(15);
 LCD_ILI9488_CMD(0x29);
 
-#elif 1 //
+#elif 0 //
 
 #define MADCTL_MY  0x80
 #define MADCTL_MX  0x40
@@ -479,7 +479,7 @@ LCD_ILI9488_CMD(0x29);
 
 	TM_ILI9341_SendCommand(0x29);    //Display on
 
-#elif 0
+#elif 1         // works!
 
 #define ILI9488WriteReg         TM_ILI9341_SendCommand
 #define ILI9488WriteData        TM_ILI9341_SendData
@@ -536,11 +536,11 @@ LCD_ILI9488_CMD(0x29);
 
 	/* Memory Access Control (36h)  */
 	ILI9488WriteReg(0x36);
-	ILI9488WriteData(0x08);
+	ILI9488WriteData(0xC8);
 
 	/* Interface Pixel Format (3Ah) */
 	ILI9488WriteReg(0x3A);  //Interface Mode Control
-	ILI9488WriteData(0x55);
+	ILI9488WriteData(0x51);
 
 	ILI9488WriteReg(0xB0);  //Interface Mode Control
 	ILI9488WriteData(0x00);
