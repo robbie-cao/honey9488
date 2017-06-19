@@ -7,21 +7,21 @@
  * @ide     Keil uVision
  * @license GNU GPL v3
  * @brief   SPI library for STM32F4xx
- *	
+ *
 @verbatim
    ----------------------------------------------------------------------
     Copyright (C) Tilen Majerle, 2015
-    
+
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     any later version.
-     
+
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-    
+
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 @endverbatim
@@ -56,13 +56,13 @@ extern "C" {
  *	- Firstbit MSB
  *	- Software SS pin configure
  *	- Direction is full duplex 3 wires
- *	
+ *
  *	\par Pinout
  *
 @verbatim
         |PINS PACK 1            |PINS PACK 2            |PINS PACK 3
 SPIX    |MOSI   MISO    SCK     |MOSI   MISO    SCK     |MOSI   MISO    SCK
-        |                                                    
+        |
 SPI1    |PA7    PA6     PA5     |PB5    PB4     PB3     |
 SPI2    |PC3    PC2     PB10    |PB15   PB14    PB13    |PI3    PI2     PI0
 SPI3    |PB5    PB4     PB3     |PC12   PC11    PC10    |
@@ -74,9 +74,9 @@ SPI6    |PG14   PG12    PG13    |
  *	In case these pins are not good for you, you can use
  *	TM_SPI_PinsPack_Custom in function and callback function will be called,
  *	where you can initialize your custom pinout for your SPI peripheral
- *	
+ *
  *	Possible changes to each SPI. Set this defines in your defines.h file.
- *	
+ *
  *	Change x with 1-6, to match your SPI
  *
 @verbatim
@@ -98,31 +98,31 @@ SPI6    |PG14   PG12    PG13    |
  - Version 2.0
   - June 06, 2015
   - Added support for changing SPI data size on runtime
- 
+
  Version 1.9
   - March 21, 2015
   - SPI Send BUG fixed
-  
+
  Version 1.8
   - March 10, 2015
   - Updated to be mode independent of STD/HAL drivers
- 
+
  Version 1.7
   - March 08, 2015
   - Added support for my new GPIO settings
- 
+
  Version 1.6
   - March 05, 2015
   - Added 2 new functions, TM_SPI_InitFull and TM_SPI_GetPrescalerFromMaxFrequency()
- 
- Version 1.5	
+
+ Version 1.5
   - January 13, 2015
   - Added function TM_SPI_InitWithMode() to initialize SPI with custom SPI mode on the fly
- 
+
  Version 1.4
   - November 09, 2014
   - Added methods for 16-bit SPI mode
- 
+
  Version 1.3
   - September 14, 2014
   - Added additional pins for SPI2
@@ -183,13 +183,13 @@ typedef enum {
  */
 typedef enum {
 	TM_SPI_DataSize_8b, /*!< SPI in 8-bits mode */
-	TM_SPI_DataSize_16b /*!< SPI in 16-bits mode */        
+	TM_SPI_DataSize_16b /*!< SPI in 16-bits mode */
 } TM_SPI_DataSize_t;
 
 /**
  * @}
  */
- 
+
  /**
  * @defgroup TM_SPI_Macros
  * @brief    Library defines
@@ -197,7 +197,7 @@ typedef enum {
  */
 
 /**
- * @brief  Supported SPI modules 
+ * @brief  Supported SPI modules
  */
 #define USE_SPI1
 #define USE_SPI2
@@ -221,7 +221,7 @@ typedef enum {
 //----- SPI1 options start -------
 //Options can be overwriten in defines.h file
 #ifndef TM_SPI1_PRESCALER
-#define TM_SPI1_PRESCALER	SPI_BaudRatePrescaler_32
+#define TM_SPI1_PRESCALER	SPI_BaudRatePrescaler_4
 #endif
 //Specify datasize
 #ifndef TM_SPI1_DATASIZE
@@ -372,7 +372,7 @@ typedef enum {
 #define SPI_CHECK_ENABLED(SPIx)   if (!((SPIx)->CR1 & SPI_CR1_SPE)) {return;}
 
 /**
- * @brief  Checks if SPI is enabled and returns value from function if not 
+ * @brief  Checks if SPI is enabled and returns value from function if not
  */
 #define SPI_CHECK_ENABLED_RESP(SPIx, val)   if (!((SPIx)->CR1 & SPI_CR1_SPE)) {return (val);}
 
@@ -438,7 +438,7 @@ uint16_t TM_SPI_GetPrescalerFromMaxFrequency(SPI_TypeDef* SPIx, uint32_t MAX_SPI
 
 /**
  * @brief  Sets data size for SPI at runtime
- * @note   You can select either 8 or 16 bits data array. 
+ * @note   You can select either 8 or 16 bits data array.
  * @param  *SPIx: Pointer to SPIx peripheral where data size will be set
  * @param  DataSize: Datasize which will be used. This parameter can be a value of @ref TM_SPI_DataSize_t enumeration
  * @retval Status of data size before changes happen
@@ -454,16 +454,16 @@ TM_SPI_DataSize_t TM_SPI_SetDataSize(SPI_TypeDef* SPIx, TM_SPI_DataSize_t DataSi
 static __INLINE uint8_t TM_SPI_Send(SPI_TypeDef* SPIx, uint8_t data) {
 	/* Check if SPI is enabled */
 	SPI_CHECK_ENABLED_RESP(SPIx, 0);
-	
+
 	/* Wait for previous transmissions to complete if DMA TX enabled for SPI */
 	SPI_WAIT(SPIx);
-	
+
 	/* Fill output buffer with data */
 	SPIx->DR = data;
-	
+
 	/* Wait for transmission to complete */
 	SPI_WAIT(SPIx);
-	
+
 	/* Return data from buffer */
 	return SPIx->DR;
 }
@@ -508,16 +508,16 @@ void TM_SPI_ReadMulti(SPI_TypeDef* SPIx, uint8_t *dataIn, uint8_t dummy, uint32_
 static __INLINE uint16_t TM_SPI_Send16(SPI_TypeDef* SPIx, uint8_t data) {
 	/* Check if SPI is enabled */
 	SPI_CHECK_ENABLED_RESP(SPIx, 0);
-	
+
 	/* Wait for previous transmissions to complete if DMA TX enabled for SPI */
 	SPI_WAIT(SPIx);
-	
+
 	/* Fill output buffer with data */
 	SPIx->DR = data;
-	
+
 	/* Wait for transmission to complete */
 	SPI_WAIT(SPIx);
-	
+
 	/* Return data from buffer */
 	return SPIx->DR;
 }
@@ -571,11 +571,11 @@ void TM_SPI_InitCustomPinsCallback(SPI_TypeDef* SPIx, uint16_t AlternateFunction
 /**
  * @}
  */
- 
+
 /**
  * @}
  */
- 
+
 /**
  * @}
  */
