@@ -1168,7 +1168,7 @@ void TM_ILI9341_Fill(uint32_t color) {
 
 void TM_ILI9341_INT_Fill(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint32_t color)
 {
-#if 0
+#if 1
   for (uint16_t x = x0; x < x1; x++) {
     for (uint16_t y = y0; y < y1; y++) {
       TM_ILI9341_DrawPixel(x, y, color);
