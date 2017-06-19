@@ -108,8 +108,35 @@ int main(void)
     TM_ILI9341_Puts(160, 240, "Hello 9488", &TM_Font_11x18, ILI9341_COLOR_RED, ILI9341_COLOR_WHITE);
     TM_ILI9341_Puts(0, 400, "320RGB x 480 Resolution and 16.7M-color", &TM_Font_7x10, ILI9341_COLOR_BLACK, ILI9341_COLOR_WHITE);
   }
+  TM_ILI9341_DrawPixel(10, 100, ILI9341_COLOR_RED);
+  TM_ILI9341_DrawPixel(10, 102, ILI9341_COLOR_BLUE);
+  TM_ILI9341_DrawPixel(10, 104, ILI9341_COLOR_GREEN);
+
+  for (int i = 10; i < 30; i++) {
+    TM_ILI9341_DrawLine(i, 110, i, 200, ILI9341_COLOR_RED);
+  }
+  for (int i = 30; i < 50; i++) {
+    TM_ILI9341_DrawLine(i, 110, i, 200, ILI9341_COLOR_GREEN);
+  }
+  for (int i = 50; i < 70; i++) {
+    TM_ILI9341_DrawLine(i, 110, i, 200, ILI9341_COLOR_BLUE);
+  }
+
+  for (int i = 100; i < 120; i++) {
+    TM_ILI9341_DrawLine(100, i, 200, i, ILI9341_COLOR_RED);
+  }
+  for (int i = 120; i < 140; i++) {
+    TM_ILI9341_DrawLine(100, i, 200, i, ILI9341_COLOR_GREEN);
+  }
+  for (int i = 140; i < 160; i++) {
+    TM_ILI9341_DrawLine(100, i, 200, i, ILI9341_COLOR_BLUE);
+  }
+
+  while (1);
+
   TM_ILI9341_DrawFilledRectangle(20, 100, 200, 200, ILI9341_COLOR_RED);
   TM_ILI9341_DrawFilledCircle(100, 300, 50, ILI9341_COLOR_GREEN);
+
 
   while (1) {
     TM_ILI9341_SendCommand(0x21);
