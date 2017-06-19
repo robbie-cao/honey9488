@@ -130,8 +130,8 @@ int main(void)
     TM_ILI9341_Puts(0, 400, "320RGB x 480 Resolution and 16.7M-color", &TM_Font_7x10, ILI9341_COLOR_BLACK, ILI9341_COLOR_WHITE);
   }
     TM_ILI9341_Puts(0, 60, "Honeywell", &TM_Font_16x26, 0xFF0000, 0xFFFFFF);
-    TM_ILI9341_Puts(0, 90, "Honeywell", &TM_Font_16x26, 0x00FF00, 0xFFFFFF);
-    TM_ILI9341_Puts(0, 120, "Honeywell", &TM_Font_16x26, 0x0000FF, 0xFFFFFF);
+    TM_ILI9341_Puts(0, 90, "Honeywell", &TM_Font_16x26, 0x00FF00, 0x0007FF);
+    TM_ILI9341_Puts(0, 120, "Honeywell", &TM_Font_16x26, 0x0000FF, 0x000000);
 
   TM_ILI9341_DrawPixel(10, 100, ILI9341_COLOR_RED);
   TM_ILI9341_DrawPixel(10, 102, ILI9341_COLOR_BLUE);
@@ -157,20 +157,20 @@ int main(void)
     TM_ILI9341_DrawLine(150, i, 250, i, 0x0000FF);
   }
 
+
+  TM_ILI9341_DrawFilledRectangle(20, 200, 200, 250, 0xFF0000);
+  TM_ILI9341_DrawFilledCircle(100, 300, 50, 0x000000);
+
   while (1);
 
-  TM_ILI9341_DrawFilledRectangle(20, 100, 200, 200, ILI9341_COLOR_RED);
-  TM_ILI9341_DrawFilledCircle(100, 300, 50, ILI9341_COLOR_GREEN);
-
-
-  while (1) {
+  while (0) {
     TM_ILI9341_SendCommand(0x21);
     Delay(100);
     TM_ILI9341_SendCommand(0x20);
     Delay(100);
   }
 
-  while (0) {
+  while (1) {
     TM_ILI9341_SendCommand(0x23);
     Delay(100);
     TM_ILI9341_SendCommand(0x22);
