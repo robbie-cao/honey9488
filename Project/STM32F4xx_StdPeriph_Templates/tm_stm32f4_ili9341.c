@@ -91,7 +91,7 @@ void TM_ILI9341_SendData(uint8_t data);
 void TM_ILI9341_SendCommand(uint8_t data);
 void TM_ILI9341_Delay(volatile unsigned int delay);
 void TM_ILI9341_SetCursorPosition(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
-void TM_ILI9341_INT_Fill(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
+void TM_ILI9341_INT_Fill(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint32_t color);
 
 void TM_Test()
 {
@@ -149,7 +149,7 @@ void TM_ILI9341_Init() {
 //	ILI9341_Opts.orientation = TM_ILI9341_Landscape;
 
 	/* Fill with white color */
-	TM_ILI9341_Fill(ILI9341_COLOR_CYAN);
+//	TM_ILI9341_Fill(ILI9341_COLOR_CYAN);
 //        TM_ILI9341_INT_Fill(0, 0, 320 - 1, 480, ILI9341_COLOR_RED);
 }
 
@@ -268,58 +268,58 @@ void TM_ILI9341_InitLCD(void) {
 	TM_ILI9341_SendCommand(ILI9341_GRAM);
 
 
-#elif 0         // works!
+#elif 1         // works!
 
 
 #define LCD_ILI9488_CMD         TM_ILI9341_SendCommand
 #define LCD_ILI9488_Parameter   TM_ILI9341_SendData
 
-//-----------------CMI------------
-LCD_ILI9488_CMD(0xE0);
-LCD_ILI9488_Parameter(0x00);
-LCD_ILI9488_Parameter(0x13);
-LCD_ILI9488_Parameter(0x18);
-LCD_ILI9488_Parameter(0x04);
-LCD_ILI9488_Parameter(0x0F);
-LCD_ILI9488_Parameter(0x06);
-LCD_ILI9488_Parameter(0x3A);
-LCD_ILI9488_Parameter(0x56);
-LCD_ILI9488_Parameter(0x4D);
-LCD_ILI9488_Parameter(0x03);
-LCD_ILI9488_Parameter(0x0A);
-LCD_ILI9488_Parameter(0x06);
-LCD_ILI9488_Parameter(0x30);
-LCD_ILI9488_Parameter(0x3E);
-LCD_ILI9488_Parameter(0x0F);
+////-----------------CMI------------
+//LCD_ILI9488_CMD(0xE0);
+//LCD_ILI9488_Parameter(0x00);
+//LCD_ILI9488_Parameter(0x13);
+//LCD_ILI9488_Parameter(0x18);
+//LCD_ILI9488_Parameter(0x04);
+//LCD_ILI9488_Parameter(0x0F);
+//LCD_ILI9488_Parameter(0x06);
+//LCD_ILI9488_Parameter(0x3A);
+//LCD_ILI9488_Parameter(0x56);
+//LCD_ILI9488_Parameter(0x4D);
+//LCD_ILI9488_Parameter(0x03);
+//LCD_ILI9488_Parameter(0x0A);
+//LCD_ILI9488_Parameter(0x06);
+//LCD_ILI9488_Parameter(0x30);
+//LCD_ILI9488_Parameter(0x3E);
+//LCD_ILI9488_Parameter(0x0F);
+//
+//LCD_ILI9488_CMD(0xE1);
+//LCD_ILI9488_Parameter(0x00);
+//LCD_ILI9488_Parameter(0x13);
+//LCD_ILI9488_Parameter(0x18);
+//LCD_ILI9488_Parameter(0x01);
+//LCD_ILI9488_Parameter(0x11);
+//LCD_ILI9488_Parameter(0x06);
+//LCD_ILI9488_Parameter(0x38);
+//LCD_ILI9488_Parameter(0x34);
+//LCD_ILI9488_Parameter(0x4D);
+//LCD_ILI9488_Parameter(0x06);
+//LCD_ILI9488_Parameter(0x0D);
+//LCD_ILI9488_Parameter(0x0B);
+//LCD_ILI9488_Parameter(0x31);
+//LCD_ILI9488_Parameter(0x37);
+//LCD_ILI9488_Parameter(0x0f);
 
-LCD_ILI9488_CMD(0xE1);
-LCD_ILI9488_Parameter(0x00);
-LCD_ILI9488_Parameter(0x13);
-LCD_ILI9488_Parameter(0x18);
-LCD_ILI9488_Parameter(0x01);
-LCD_ILI9488_Parameter(0x11);
-LCD_ILI9488_Parameter(0x06);
-LCD_ILI9488_Parameter(0x38);
-LCD_ILI9488_Parameter(0x34);
-LCD_ILI9488_Parameter(0x4D);
-LCD_ILI9488_Parameter(0x06);
-LCD_ILI9488_Parameter(0x0D);
-LCD_ILI9488_Parameter(0x0B);
-LCD_ILI9488_Parameter(0x31);
-LCD_ILI9488_Parameter(0x37);
-LCD_ILI9488_Parameter(0x0f);
-
-LCD_ILI9488_CMD(0xC0);
-LCD_ILI9488_Parameter(0x10);
-LCD_ILI9488_Parameter(0x10);
-
-LCD_ILI9488_CMD(0xC1);
-LCD_ILI9488_Parameter(0x41);
-
-LCD_ILI9488_CMD(0xC5);
-LCD_ILI9488_Parameter(0x00);
-LCD_ILI9488_Parameter(0x2c); // VCOM
-LCD_ILI9488_Parameter(0x80);
+//LCD_ILI9488_CMD(0xC0);
+//LCD_ILI9488_Parameter(0x10);
+//LCD_ILI9488_Parameter(0x10);
+//
+//LCD_ILI9488_CMD(0xC1);
+//LCD_ILI9488_Parameter(0x41);
+//
+//LCD_ILI9488_CMD(0xC5);
+//LCD_ILI9488_Parameter(0x00);
+//LCD_ILI9488_Parameter(0x2c); // VCOM
+//LCD_ILI9488_Parameter(0x80);
 
 
 LCD_ILI9488_CMD(0x36);
@@ -328,28 +328,28 @@ LCD_ILI9488_Parameter(0xC8);
 LCD_ILI9488_CMD(0x3A);  //Interface Mode Control
 LCD_ILI9488_Parameter(0x51);
 
-LCD_ILI9488_CMD(0XB0);  //Interface Mode Control
-LCD_ILI9488_Parameter(0x00);
-LCD_ILI9488_CMD(0xB1);   //Frame rate 70HZ
-LCD_ILI9488_Parameter(0xB0);
-LCD_ILI9488_Parameter(0x11);
+//LCD_ILI9488_CMD(0XB0);  //Interface Mode Control
+//LCD_ILI9488_Parameter(0x00);
+//LCD_ILI9488_CMD(0xB1);   //Frame rate 70HZ
+//LCD_ILI9488_Parameter(0xB0);
+//LCD_ILI9488_Parameter(0x11);
 
-LCD_ILI9488_CMD(0xB4);
-LCD_ILI9488_Parameter(0x02);
+//LCD_ILI9488_CMD(0xB4);
+//LCD_ILI9488_Parameter(0x02);
 
 LCD_ILI9488_CMD(0xB6);  //RGB/MCU Interface Control
 LCD_ILI9488_Parameter(0x00);
 LCD_ILI9488_Parameter(0x22);
 LCD_ILI9488_Parameter(0x3B);
 
-LCD_ILI9488_CMD(0xE9);
-LCD_ILI9488_Parameter(0x00);
+//LCD_ILI9488_CMD(0xE9);
+//LCD_ILI9488_Parameter(0x00);
 
-LCD_ILI9488_CMD(0XF7);
-LCD_ILI9488_Parameter(0xA9);
-LCD_ILI9488_Parameter(0x51);
-LCD_ILI9488_Parameter(0x2C);
-LCD_ILI9488_Parameter(0x82);
+//LCD_ILI9488_CMD(0XF7);
+//LCD_ILI9488_Parameter(0xA9);
+//LCD_ILI9488_Parameter(0x51);
+//LCD_ILI9488_Parameter(0x2C);
+//LCD_ILI9488_Parameter(0x82);
 
 LCD_ILI9488_CMD(0x11);
 	Delay(15);
@@ -479,7 +479,7 @@ LCD_ILI9488_CMD(0x29);
 
 	TM_ILI9341_SendCommand(0x29);    //Display on
 
-#elif 1         // works!
+#elif 0         // works!
 
 #define ILI9488WriteReg         TM_ILI9341_SendCommand
 #define ILI9488WriteData        TM_ILI9341_SendData
@@ -574,7 +574,7 @@ LCD_ILI9488_CMD(0x29);
 	/* Display ON (29h) */
 	ILI9488WriteReg(0x29);
 
-#elif 0         // works!
+#elif 1         // works!
 
 /* Level 1 Commands (from the display Datasheet) */
 #define ILI9488_CMD_NOP                             0x00
@@ -795,6 +795,7 @@ LCD_ILI9488_CMD(0x29);
 	// Interface Pixel Format
 	ili9488_send_command(ILI9488_CMD_INTERFACE_PIXEL_FORMAT);
 	ili9488_send_byte(0x51);// DPI: 16bpp  DBI: 16bpp
+//	ili9488_send_byte(0x66);// DPI: 16bpp  DBI: 16bpp
 	ili9488_wait_for_send_done();
 	ili9488_deselect_chip();
 
@@ -1046,8 +1047,13 @@ void TM_ILI9341_DrawPixel(uint16_t x, uint16_t y, uint32_t color) {
 	TM_ILI9341_SetCursorPosition(x, y, x, y);
 
 	TM_ILI9341_SendCommand(ILI9341_GRAM);
+#if 1
 	TM_ILI9341_SendData(color >> 8);
 	TM_ILI9341_SendData(color & 0xFF);
+#else
+	TM_ILI9341_SendData(color & 0xFF);
+	TM_ILI9341_SendData(color >> 8);
+#endif
 }
 
 
@@ -1070,7 +1076,7 @@ void TM_ILI9341_Fill(uint32_t color) {
 	TM_ILI9341_INT_Fill(0, 0, ILI9341_Opts.width - 1, ILI9341_Opts.height, color);
 }
 
-void TM_ILI9341_INT_Fill(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color) {
+void TM_ILI9341_INT_Fill(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint32_t color) {
 	uint32_t pixels_count;
 
 	/* Set cursor position */
