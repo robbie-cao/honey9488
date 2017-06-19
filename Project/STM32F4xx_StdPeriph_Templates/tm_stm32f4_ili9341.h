@@ -7,21 +7,21 @@
  * @ide     Keil uVision
  * @license GNU GPL v3
  * @brief   ILI9341 library for STM32F4xx with SPI communication, without LTDC hardware
- *	
+ *
 @verbatim
    ----------------------------------------------------------------------
     Copyright (C) Tilen Majerle, 2015
-    
+
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     any later version.
-     
+
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-    
+
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
    ----------------------------------------------------------------------
@@ -41,12 +41,12 @@
  * @{
  *
  * This driver works for all STM32F4xx series with built in SPI peripheral.
- *	
+ *
  * \par Default pinout
  *
 @verbatim
 ILI9341      STM32F4xx    DESCRIPTION
-		
+
 SDO (MISO    PF8          Output from LCD for SPI.	Not used, can be left
 LED          3.3V         Backlight
 SCK          PF7          SPI clock
@@ -57,18 +57,18 @@ CS           PC2          Chip select for SPI
 GND          GND          Ground
 VCC          3.3V         Positive power supply
 @endverbatim
- *		
+ *
  * All pins can be changed in your defines.h file
- *		
+ *
 @verbatim
 //Default SPI used is SPI5. Check my SPI library for other pinouts
 #define ILI9341_SPI           SPI5
 #define ILI9341_SPI_PINS      TM_SPI_PinsPack_1
-		
+
 //Default CS pin. Edit this in your defines.h file
 #define ILI9341_CS_PORT       GPIOC
 #define ILI9341_CS_PIN        GPIO_PIN_2
-		
+
 //Default D/C (or WRX) pin. Edit this in your defines.h file
 #define ILI9341_WRX_PORT      GPIOD
 #define ILI9341_WRX_PIN       GPIO_PIN_13
@@ -77,14 +77,14 @@ VCC          3.3V         Positive power supply
  * Reset pin can be disabled, if you need GPIOs for other purpose.
  * To disable RESET pin, add line below to defines.h file
  * If you disable pin, then set LCD's RESET pin to VCC.
- *	
+ *
 @verbatim
 //Disable RESET pin
 #define ILI9341_USE_RST_PIN			0
 @endverbatim
- *		
+ *
  * But if you want to use RESET pin, you can change its settings in defines.h file
- *	
+ *
 @verbatim
 //Default RESET pin. Edit this in your defines.h file
 #define ILI9341_RST_PORT			GPIOD
@@ -97,12 +97,12 @@ VCC          3.3V         Positive power supply
  Version 1.3
   - June 06, 2015
   - Added support for SPI DMA for faster refreshing
- 
+
  Version 1.2
   - March 14, 2015
   - Added support for new GPIO system
   - Added functions TM_ILI9341_DisplayOff() and TM_ILI9341_DisplayOn()
- 
+
  Version 1.0
   - First release
 @endverbatim
@@ -143,7 +143,8 @@ VCC          3.3V         Positive power supply
  * @brief  This SPI pins are used on STM32F429-Discovery board
  */
 #ifndef ILI9341_SPI
-#define ILI9341_SPI           SPI5
+#define ILI9341_SPI           SPI1
+//#define ILI9341_SPI           SPI5
 #define ILI9341_SPI_PINS      TM_SPI_PinsPack_1
 #endif
 
@@ -172,9 +173,12 @@ VCC          3.3V         Positive power supply
 #endif
 
 /* LCD settings */
-#define ILI9341_WIDTH        240
-#define ILI9341_HEIGHT       320
-#define ILI9341_PIXEL        76800
+//#define ILI9341_WIDTH        240
+//#define ILI9341_HEIGHT       320
+//#define ILI9341_PIXEL        76800
+#define ILI9341_WIDTH        320
+#define ILI9341_HEIGHT       480
+#define ILI9341_PIXEL        153600
 
 /* Colors */
 #define ILI9341_COLOR_WHITE			0xFFFF
@@ -197,7 +201,7 @@ VCC          3.3V         Positive power supply
 /**
  * @}
  */
- 
+
 /**
  * @defgroup TM_ILI9341_Typedefs
  * @brief    Library Typedefs
@@ -361,11 +365,11 @@ void TM_ILI9341_DisplayOff(void);
 /**
  * @}
  */
- 
+
 /**
  * @}
  */
- 
+
 /**
  * @}
  */
