@@ -45,7 +45,7 @@
         </option>
         <option>
           <name>MemFile</name>
-          <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32F439NI.ddf</state>
+          <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32F407VG.ddf</state>
         </option>
         <option>
           <name>RunToEnable</name>
@@ -113,7 +113,7 @@
         </option>
         <option>
           <name>FlashLoadersV3</name>
-          <state>$TOOLKIT_DIR$\config\flashloader\ST\FlashSTM32F427xI.board</state>
+          <state>$TOOLKIT_DIR$\config\flashloader\ST\FlashSTM32F4xxx.board</state>
         </option>
         <option>
           <name>OCImagesSuppressCheck1</name>
@@ -1688,7 +1688,7 @@
         </option>
         <option>
           <name>MemFile</name>
-          <state></state>
+          <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32F437II.ddf</state>
         </option>
         <option>
           <name>RunToEnable</name>
@@ -1732,7 +1732,7 @@
         </option>
         <option>
           <name>OCLastSavedByProductVersion</name>
-          <state>6.40.3.54103</state>
+          <state>7.80.4.12487</state>
         </option>
         <option>
           <name>UseFlashLoader</name>
@@ -1756,7 +1756,7 @@
         </option>
         <option>
           <name>FlashLoadersV3</name>
-          <state>$TOOLKIT_DIR$\config\flashloader\ST\FlashSTM32F42xx.board</state>
+          <state>$TOOLKIT_DIR$\config\flashloader\ST\FlashSTM32F427xI.board</state>
         </option>
         <option>
           <name>OCImagesSuppressCheck1</name>
@@ -1824,7 +1824,7 @@
         </option>
         <option>
           <name>OCMulticoreNrOfCores</name>
-          <state></state>
+          <state>1</state>
         </option>
         <option>
           <name>OCMulticoreMaster</name>
@@ -3375,7 +3375,7 @@
         </option>
         <option>
           <name>OCLastSavedByProductVersion</name>
-          <state>6.40.3.54103</state>
+          <state>7.80.4.12487</state>
         </option>
         <option>
           <name>UseFlashLoader</name>
@@ -3467,7 +3467,7 @@
         </option>
         <option>
           <name>OCMulticoreNrOfCores</name>
-          <state></state>
+          <state>1</state>
         </option>
         <option>
           <name>OCMulticoreMaster</name>
@@ -4490,7 +4490,7 @@
         </option>
         <option>
           <name>CCSTLinkInterfaceRadio</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>CCSTLinkInterfaceCmdLine</name>
