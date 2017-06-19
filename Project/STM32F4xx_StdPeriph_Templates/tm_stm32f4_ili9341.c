@@ -149,7 +149,7 @@ void TM_ILI9341_Init() {
 //	ILI9341_Opts.orientation = TM_ILI9341_Landscape;
 
 	/* Fill with white color */
-//	TM_ILI9341_Fill(ILI9341_COLOR_CYAN);
+	TM_ILI9341_Fill(ILI9341_COLOR_CYAN);
 //        TM_ILI9341_INT_Fill(0, 0, 320 - 1, 480, ILI9341_COLOR_RED);
 }
 
@@ -217,7 +217,7 @@ void TM_ILI9341_InitLCD(void) {
 	SPI4_DAT_8bit(0x80);
 
 	SPI4_CMD_8bit(0x36);
-	SPI4_DAT_8bit(0x48);
+	SPI4_DAT_8bit(0xC8);
 
 	SPI4_CMD_8bit(0x3A);  //Interface Mode Control
 	SPI4_DAT_8bit(0x66);  //6-6-6
@@ -229,8 +229,9 @@ void TM_ILI9341_InitLCD(void) {
 	SPI4_DAT_8bit(0x02);
 
 	SPI4_CMD_8bit(0xB6);  //mcu-interface
-	SPI4_DAT_8bit(0x02);
-	SPI4_DAT_8bit(0x02);
+	SPI4_DAT_8bit(0x00);
+	SPI4_DAT_8bit(0x22);
+	SPI4_DAT_8bit(0x3B);
 
 
 	SPI4_CMD_8bit(0xE9);
@@ -246,6 +247,12 @@ void TM_ILI9341_InitLCD(void) {
 	Delay(15);
 	SPI4_CMD_8bit(0x29); //Display on
 	Delay(10);
+
+//        // All pixel off
+//        TM_ILI9341_SendCommand(0x23);
+//	Delay(10);
+//        // All pixel on
+//        TM_ILI9341_SendCommand(0x22);
 
         return;
 //----
@@ -1129,10 +1136,10 @@ void TM_ILI9341_DrawPixel(uint16_t x, uint16_t y, uint32_t color) {
 	TM_ILI9341_SetCursorPosition(x, y, x, y);
 
 	TM_ILI9341_SendCommand(ILI9341_GRAM);
-#if 0
+#if 0	// RGB-565
 	TM_ILI9341_SendData(color >> 8);
 	TM_ILI9341_SendData(color & 0xFF);
-#else
+#else	// RGB-666
 	TM_ILI9341_SendData((color >> 16) & 0xFF);
 	TM_ILI9341_SendData((color >> 8) & 0xFF);
 	TM_ILI9341_SendData(color & 0xFF);
@@ -1159,7 +1166,15 @@ void TM_ILI9341_Fill(uint32_t color) {
 	TM_ILI9341_INT_Fill(0, 0, ILI9341_Opts.width - 1, ILI9341_Opts.height, color);
 }
 
-void TM_ILI9341_INT_Fill(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint32_t color) {
+void TM_ILI9341_INT_Fill(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint32_t color)
+{
+#if 1
+  for (uint16_t x = x0; x < x1; x++) {
+    for (uint16_t y = y0; y < y1; y++) {
+      TM_ILI9341_DrawPixel(x, y, color);
+    }
+  }
+#else
 	uint32_t pixels_count;
 
 	/* Set cursor position */
@@ -1195,6 +1210,7 @@ void TM_ILI9341_INT_Fill(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uin
 
 	/* Go back to 8-bit SPI mode */
 	TM_SPI_SetDataSize(ILI9341_SPI, TM_SPI_DataSize_8b);
+#endif
 }
 
 void TM_ILI9341_Delay(volatile unsigned int delay) {
